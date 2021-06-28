@@ -22,8 +22,18 @@ public class Card {
         return suit;
     }
 
-    public void getName() {
-        System.out.println("This is a " + );
+    public String getName(int val, Suit suit) {
+        if (val == 1) {
+            return ("Ace of " + suit);
+        } else if (val == 11) {
+            return ("Jack of " + suit);
+        } else if (val == 12) {
+            return ("Queen of " + suit);
+        } else if (val == 13) {
+            return ("King of " + suit);
+        } else {
+            return (val + " of " + suit);
+        }
     }
 
     
