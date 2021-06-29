@@ -14,6 +14,27 @@ public class Card {
         this.val = val;
     }
 
+    public Card(int suit, int val) {
+        switch (suit) {
+            case 0: 
+            this.suit = Suit.HEARTS;
+            break;
+
+            case 1:
+            this.suit = Suit.DIAMONDS;
+            break;
+
+            case 2:
+            this.suit = Suit.SPADES;
+            break;
+
+            case 3:
+            this.suit = Suit.CLUBS;
+            break;
+        }
+        this.val = val;
+    }
+
     public int getVal() {
         return val;
     }
