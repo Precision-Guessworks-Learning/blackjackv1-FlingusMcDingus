@@ -4,15 +4,37 @@ public class Main{
     public static void main(String[] args) {
         ArrayList<Card> deckOfCards = new ArrayList<Card>();
         Deck newDeck = new Deck(deckOfCards);
+        Card newCard;
         newDeck.shuffle();
+        Hand newHand = new Hand();
+        Boolean gameOn = true;
+        
+        System.out.println("Game Start.");
+        System.out.println("You draw two cards to start");
 
-        for (int i =0; i<53; i++) {
-            Card drawnCard = newDeck.drawCard();
-            if (drawnCard != null) {
-                System.out.println(drawnCard.getName(drawnCard.getVal(), drawnCard.getSuit()));
-            } else {
-                System.out.println("There are no cards to draw");
-            }
+        newCard = newDeck.drawCard();
+        System.out.println(newCard.getName(newCard.getVal(), newCard.getSuit()));
+        int firstVal = checkForBigNum(newCard);
+
+        newCard = newDeck.drawCard();
+        System.out.println(newCard.getName(newCard.getVal(), newCard.getSuit()));
+        int newVal = checkForBigNum(newCard);
+
+        System.out.println("Your total is " + (firstVal + newVal));
+        firstVal = firstVal + newVal;
+
+        while (gameOn == true) {
+
+        }
+        
+    }
+
+    public static int checkForBigNum(Card checkCard) {
+        int cardVal = checkCard.getVal();
+        if (cardVal > 10) {
+            return 10;
+        } else {
+            return cardVal;
         }
     }
 }
