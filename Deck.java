@@ -4,11 +4,11 @@ import java.util.*;
 public class Deck {
 
     Card newCard;
-    ArrayList<Card> newDeck = new ArrayList<Card>();
+    static ArrayList<Card> newDeck = new ArrayList<Card>();
 
     public Deck(ArrayList<Card> fillDeck) {
-        for (int i=0; i<4; i++) {
-            for (int j=1; j<14; j++) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 1; j < 14; j++) {
                 newCard = new Card(i, j);
                 newDeck.add(newCard);
             }
@@ -29,7 +29,7 @@ public class Deck {
     }
 
     public void shuffle() {
-        Random rand = new Random(52);
+        Random rand = new Random();
         Collections.shuffle(newDeck, rand);
     }
 }
