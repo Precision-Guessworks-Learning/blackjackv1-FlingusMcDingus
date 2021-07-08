@@ -18,7 +18,7 @@ Functions:
 Stems from an ArrayList of 52 unique cards.
 
 ## Hand Object
-Needs to be able to contain any number of cards.
-Needs to be able to get the value of its hand.
-Needs to be able to accept cards.
-Needs to be able to return all cards at once.
+Needs to be able to contain any number of cards. (Use an arraylist)
+Needs to be able to get the value of its hand. (Use card methods)
+Needs to be able to accept cards. (Deck Draw method)
+Needs to be able to return all cards at once. (Deck Replace method)
