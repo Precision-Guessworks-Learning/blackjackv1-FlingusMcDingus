@@ -7,24 +7,36 @@ public class Main{
         Card newCard;
         newDeck.shuffle();
         Hand newHand = new Hand();
+        Hand dealerHand = new Hand();
         Boolean gameOn = true;
         Scanner hitOrStay = new Scanner(System.in);
+        int total;
+        int dealerTotal;
         
         System.out.println("Game Start.");
-        System.out.println("You draw two cards to start");
+        System.out.println("You and the dealer draw two cards to start");
 
         newCard = newDeck.drawCard();
         System.out.println(newCard.getName(newCard.getVal(), newCard.getSuit()));
-        int firstVal = checkForBigNum(newCard);
-        //firstVal = checkForAce(firstVal);
-        
+        newHand.addToHand(newCard);
+
+        newCard = newDeck.drawCard();
+        System.out.println("The dealer gets: " + newCard.getName(newCard.getVal(), newCard.getSuit()));
+        dealerHand.addToHand(newCard);
+
         newCard = newDeck.drawCard();
         System.out.println(newCard.getName(newCard.getVal(), newCard.getSuit()));
-        int newVal = checkForBigNum(newCard);
+        newHand.addToHand(newCard);
 
-        System.out.println("Your total is " + (firstVal + newVal));
-        firstVal = firstVal + newVal;
-        System.out.println(firstVal);
+        newCard = newDeck.drawCard();
+        System.out.println("The dealer gets: " + newCard.getName(newCard.getVal(), newCard.getSuit()));
+        dealerHand.addToHand(newCard);
+
+        total = (checkForBigNum(newHand.getCard(0).getVal()) + checkForBigNum(newHand.getCard(1).getVal()));
+        System.out.println("Your total is " + total);
+
+        dealerTotal = (checkForBigNum(dealerHand.getCard(0).getVal()) + checkForBigNum(dealerHand.getCard(1).getVal()));
+        System.out.println("The dealer's total is: " + dealerTotal);
 
         while (gameOn == true) {
             System.out.println("Hit?\n\n1)Hit me\n2)Stay");
@@ -33,16 +45,38 @@ public class Main{
                 case 1:
                 newCard = newDeck.drawCard();
                 System.out.println(newCard.getName(newCard.getVal(), newCard.getSuit()));
-                int newValTwo = checkForBigNum(newCard);
-                System.out.println("Your total is " + (firstVal + newValTwo));
-                firstVal = firstVal + newValTwo;
+                newHand.addToHand(newCard);
+
+                if (dealerTotal <= 16) {
+                    newCard = newDeck.drawCard();
+                    System.out.println("The dealer gets: " + newCard.getName(newCard.getVal(), newCard.getSuit()));
+                    dealerHand.addToHand(newCard);
+                    dealerTotal = dealerTotal + checkForBigNum(newHand.getCard(dealerHand.getSize() - 1).getVal());
+                }
+
+                total = total + checkForBigNum(newHand.getCard(newHand.getSize() - 1).getVal());
+                System.out.println("Your total is " + total);
+
+                
+                System.out.println("The dealer's total is " + dealerTotal);
+                if (total > 21) {
+                    System.out.println("You bust. Sorry 'bout your luck.");
+                    gameOn = false;
+                } else  if (dealerTotal > 21) {
+                    System.out.println("The dealer busts, you win by default!");
+                }
+
+               
+                break;
+
+                case 2:
+                
             }
         }
         
     }
 
-    public static int checkForBigNum(Card checkCard) {
-        int cardVal = checkCard.getVal();
+    public static int checkForBigNum(int cardVal) {
         if (cardVal > 10) {
             return 10;
         } else {
@@ -50,15 +84,5 @@ public class Main{
         }
     }
 
-    /*public static int checkForAce(int checkCard) {
-        Scanner k = new Scanner(System.in);
-        if (checkCard == 1) {
-            System.out.println("You got an Ace. Is it worth one, or ten?");
-            int val = k.nextInt();
-            while (val != 1 || val != 10) {
-                System.out.println("");
-            }
-            return val;
-        }
-    }*/
+    
 }
