@@ -11,6 +11,14 @@ public class Hand{
         cardsInHand.add(newCard);
     }
 
+    public Card getCard(int newCard) {
+        return cardsInHand.get(newCard);
+    }
+
+    public int getSize() {
+        return cardsInHand.size();
+    }
+
     public void returnAllCardsToDeck(Deck newDeck) {
         for (int i = cardsInHand.size(); i>0; i--) {
             newDeck.replaceCard(cardsInHand.get(i));
